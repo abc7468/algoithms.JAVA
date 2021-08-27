@@ -1,4 +1,4 @@
-package Programmers.Weekly;
+package Programmers.LV1;
 
 import java.util.ArrayList;
 import java.util.Collections;
