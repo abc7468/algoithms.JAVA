@@ -1,13 +1,12 @@
-package Programmers.LV3;
+package Programmers.LV2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
-public class Q1830 {
+public class Q17684 {
 
-    static public int[] solution(String msg) {
-        int[] answer = {};
+    static public ArrayList<Integer> solution(String msg) {
         ArrayList<Integer> answerTmp = new ArrayList<>();
         HashMap<String, Integer> dic = new HashMap<>();
         int len = msg.length();
@@ -16,25 +15,26 @@ public class Q1830 {
         }
         int index = 27;
         for(int i =0; i<len; i++){
-            for(int j =i+1; j<len; j++){
-                if(dic.containsKey(msg.substring(i,j))){
-                    if(dic.containsKey(msg.substring(i,j+1))){
-                        continue;
-                    }
+            for(int j =i+1; j<=len; j++){
+                if(j==len){
                     answerTmp.add(dic.get(msg.substring(i,j)));
-                }else{
-                    dic.put(msg.substring(i,j),index++);
-                    System.out.println(msg.substring(i,j));
+                    dic.put(msg.substring(i,j), index++);
+                    i = j-1;
+                    break;
+                }
+                if(!dic.containsKey(msg.substring(i,j+1))) {
+                    answerTmp.add(dic.get(msg.substring(i,j)));
+                    dic.put(msg.substring(i,j+1), index++);
+                    i = j-1;
                     break;
                 }
             }
         }
-        answerTmp.add(dic.get(msg.substring(len-1,len)));
         System.out.println(answerTmp);
-        return answer;
+        return answerTmp;
     }
     public static void main(String[] args){
-        System.out.println(solution("KAKAO"));
+        System.out.println(solution("ABABABABABABABAB"));
     }
 
 }
