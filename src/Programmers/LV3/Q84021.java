@@ -167,7 +167,7 @@ public class Q84021 {
         place.clear();
     }
     public static int solution(int[][] game_board, int[][] table) {
-        int answer = -1;
+        int answer = 0;
         size = table.length;
         boardVisited = new boolean[size][size];
         tableVisited = new boolean[size][size];
@@ -218,7 +218,38 @@ public class Q84021 {
             }
         }
 
+        for(int i =1; i<7; i++){
+            for(Block boardBlock : boardPlaces.get(i)){
+                int blockSize = boardBlock.size;
+                candiTable : for(Block tableBlock : tablePlaces.get(i)){
+                    if(blockSize != tableBlock.size || tableBlock.isUse) continue;
+                    else{
+                        for(int k =0; k<4; k++){
+                            int count = 0;
+                            candi : for(int r =0; r<blockSize; r++){
+                                for(int c =0; c<blockSize; c++){
+                                    if(boardBlock.blocks[0][r][c]==tableBlock.blocks[k][r][c] && tableBlock.blocks[k][r][c]==1){
+                                        count++;
+                                    }else if(boardBlock.blocks[0][r][c]==tableBlock.blocks[k][r][c]){
+                                        continue;
+                                    }
+                                    else{
+                                        break candi;
+                                    }
+                                }
+                            }
+                            if(count == i){
+                                tableBlock.isUse=true;
+                                answer = answer+i;
+                                break candiTable;
 
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
 
 
         return answer;
@@ -234,6 +265,8 @@ public class Q84021 {
     public static void main(String[] args){
         int[][] game_board = {{1,1,0,0,1,0},{0,0,1,0,1,0},{0,1,1,0,0,1},{1,1,0,1,1,1},{1,0,0,0,1,0},{0,1,1,1,0,0}};
         int[][] table = {{1,0,0,1,1,0},{1,0,1,0,1,0},{0,1,1,0,1,1},{0,0,1,0,0,0},{1,1,0,1,1,0},{0,1,0,0,0,0}};
+//        int[][] game_board = {{0, 0, 0}, {1, 1, 0}, {1, 1, 1}};
+//        int[][] table = {{1, 1, 1}, {1, 0, 0}, {0, 0, 0}};
         System.out.println(solution(game_board, table));
     }
 }
