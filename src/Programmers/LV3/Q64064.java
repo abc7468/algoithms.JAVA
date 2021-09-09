@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Q64064 {
-    static int answer = 0;
     static boolean[] visited;
 
     static HashMap<String, Integer> id = new HashMap<>();
