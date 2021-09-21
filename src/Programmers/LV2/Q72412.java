@@ -46,9 +46,12 @@ public class Q72412 {
         for(String[] q : queries){
             int cnt = 0;
             int startIndex = binarySearch(Integer.parseInt(q[4]));
-            for(int i = startIndex; i< infos.length-1; i++){
+            for(int i = startIndex; i< infos.length; i++){
                 for(int j = 0; j<4; j++){
                     if(q[j].equals("-")){
+                        if(j==q.length-2){
+                            cnt++;
+                        }
                         continue;
                     }
                     if(!q[j].equals(infos[i][j])){
