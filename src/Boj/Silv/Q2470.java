@@ -1,4 +1,4 @@
-package Boj.Gold;
+package Boj.Silv;
 
 import java.io.*;
 import java.util.Arrays;
